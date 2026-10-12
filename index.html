@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combien te coûte ta paperasse ?</title>
+<meta name="description" content="Calcule en 30 secondes ce que l'administratif te coûte chaque mois en heures non facturées.">
+<meta property="og:title" content="Combien te coûte ta paperasse ?">
+<meta property="og:description" content="Calcule en 30 secondes ce que l'administratif te coûte chaque mois.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --nuit:#0F1B2D;
+    --nuit-clair:#18263C;
+    --ivoire:#F5F3EE;
+    --or:#F2A33A;
+    --gris:#9AA7B8;
+    --bord:rgba(245,243,238,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--nuit);
+    color:var(--ivoire);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:0 16px 64px;
+  }
+  .wrap{max-width:560px;margin:0 auto}
+
+  header{padding:40px 0 28px;text-align:center}
+  .marque{
+    font-size:15px;letter-spacing:.02em;color:var(--gris);
+    display:inline-flex;align-items:center;gap:2px;
+  }
+  .marque b{color:var(--ivoire);font-weight:600}
+  .pt{color:var(--or)}
+
+  h1{
+    font-size:clamp(26px,6.4vw,34px);
+    line-height:1.18;font-weight:700;letter-spacing:-.02em;
+    margin:22px 0 12px;
+  }
+  .chapo{color:var(--gris);font-size:16px;max-width:430px;margin:0 auto}
+
+  .carte{
+    background:var(--nuit-clair);
+    border:1px solid var(--bord);
+    border-radius:16px;
+    padding:22px 20px;
+    margin-top:28px;
+  }
+  label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  .aide{display:block;font-size:13px;color:var(--gris);font-weight:400;margin-bottom:8px}
+  .champ{margin-bottom:20px}
+  .champ:last-of-type{margin-bottom:8px}
+
+  .saisie{position:relative}
+  input[type=number],input[type=text],input[type=tel],input[type=email]{
+    width:100%;
+    background:#0B1524;
+    border:1px solid var(--bord);
+    border-radius:10px;
+    color:var(--ivoire);
+    font-size:17px;
+    padding:14px 16px;
+    font-family:inherit;
+    outline:none;
+  }
+  input[type=number]{padding-right:56px}
+  input:focus{border-color:var(--or)}
+  input::placeholder{color:#5B6A80}
+  .unite{
+    position:absolute;right:16px;top:50%;transform:translateY(-50%);
+    color:var(--gris);font-size:15px;pointer-events:none;
+  }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  input[type=number]{-moz-appearance:textfield}
+
+  .choix{display:flex;gap:8px;flex-wrap:wrap}
+  .choix button{
+    flex:1 1 auto;min-width:72px;
+    background:#0B1524;border:1px solid var(--bord);border-radius:10px;
+    color:var(--ivoire);font-size:15px;font-family:inherit;
+    padding:12px 10px;cursor:pointer;
+  }
+  .choix button[aria-pressed=true]{border-color:var(--or);background:rgba(242,163,58,.12)}
+
+  .cta{
+    display:block;width:100%;
+    background:var(--or);color:#0F1B2D;
+    border:none;border-radius:10px;
+    font-size:17px;font-weight:700;font-family:inherit;
+    padding:16px;cursor:pointer;margin-top:4px;
+  }
+  .cta:disabled{opacity:.45;cursor:not-allowed}
+  .cta.secondaire{background:transparent;color:var(--ivoire);border:1px solid var(--bord);font-weight:600}
+
+  .resultat{margin-top:28px;display:none}
+  .resultat.visible{display:block}
+  .montant{
+    font-size:clamp(40px,11vw,56px);font-weight:700;color:var(--or);
+    letter-spacing:-.03em;line-height:1.05;
+  }
+  .periode{color:var(--gris);font-size:15px;margin-top:4px}
+  .lignes{margin-top:20px;border-top:1px solid var(--bord)}
+  .ligne{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--bord);font-size:15px}
+  .ligne span:first-child{color:var(--gris)}
+  .ligne span:last-child{font-weight:600;text-align:right}
+  .note{font-size:13px;color:var(--gris);margin-top:14px}
+
+  .relance{margin-top:16px;font-size:16px}
+  .relance strong{color:var(--ivoire)}
+
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 16px;font-size:13px;color:var(--gris)}
+  .consent input{margin-top:3px;width:17px;height:17px;flex:none;accent-color:var(--or)}
+  .consent a{color:var(--gris)}
+
+  .erreur{color:#FF9B8A;font-size:14px;margin-bottom:12px;display:none}
+  .erreur.visible{display:block}
+
+  .merci{display:none;text-align:center;padding:8px 0}
+  .merci.visible{display:block}
+  .merci h2{font-size:24px;margin-bottom:10px}
+  .merci p{color:var(--gris)}
+
+  footer{margin-top:36px;text-align:center;font-size:13px;color:#5B6A80}
+  @media (max-width:380px){ .choix button{min-width:64px;font-size:14px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="marque"><b>temps</b><span class="pt">.</span><b>patron</b></div>
+    <h1>Combien te coûte vraiment ta paperasse&nbsp;?</h1>
+    <p class="chapo">Chaque heure passée sur l'administratif est une heure que tu ne factures pas. Fais le calcul en 30 secondes.</p>
+  </header>
+
+  <!-- Étape 1 : calcul -->
+  <section class="carte" id="etapeCalcul">
+    <div class="champ">
+      <label for="tarif">Tu factures combien de l'heure&nbsp;?</label>
+      <span class="aide">Ton tarif chantier, séance ou consultation.</span>
+      <div class="saisie">
+        <input type="number" id="tarif" inputmode="decimal" min="1" step="1" placeholder="45">
+        <span class="unite">€ / h</span>
+      </div>
+    </div>
+
+    <div class="champ">
+      <label for="heures">Combien d'heures d'administratif par semaine&nbsp;?</label>
+      <span class="aide">Paie, contrats, devis, relances, dossiers, mails.</span>
+      <div class="saisie">
+        <input type="number" id="heures" inputmode="decimal" min="0.5" step="0.5" placeholder="6">
+        <span class="unite">h</span>
+      </div>
+    </div>
+
+    <div class="champ">
+      <label>Tu as combien de salariés&nbsp;?</label>
+      <span class="aide">Ça change ce qu'il est possible de déléguer.</span>
+      <div class="choix" id="salaries">
+        <button type="button" data-val="0" aria-pressed="false">Aucun</button>
+        <button type="button" data-val="1-2" aria-pressed="false">1 à 2</button>
+        <button type="button" data-val="3-5" aria-pressed="false">3 à 5</button>
+        <button type="button" data-val="6+" aria-pressed="false">6 et +</button>
+      </div>
+    </div>
+
+    <p class="erreur" id="erreurCalcul">Renseigne ton tarif horaire et tes heures pour voir le résultat.</p>
+    <button class="cta" id="btnCalculer">Voir ce que ça me coûte</button>
+  </section>
+
+  <!-- Étape 2 : résultat + capture -->
+  <section class="resultat" id="etapeResultat">
+    <div class="carte">
+      <div class="periode">Ta paperasse te coûte environ</div>
+      <div class="montant" id="montantMois">—</div>
+      <div class="periode">par mois en heures non facturées</div>
+
+      <div class="lignes">
+        <div class="ligne"><span>Sur un an</span><span id="montantAn">—</span></div>
+        <div class="ligne"><span>Heures perdues par an</span><span id="heuresAn">—</span></div>
+        <div class="ligne"><span>Soit l'équivalent de</span><span id="joursAn">—</span></div>
+      </div>
+      <p class="note">Estimation basée sur tes chiffres : tarif horaire × heures par semaine × 4,3 semaines.</p>
+    </div>
+
+    <div class="carte" id="carteContact">
+      <p class="relance"><strong>Ce chiffre te parle&nbsp;?</strong> Je te prépare le détail et je te montre ce que tu peux déléguer, combien ça coûte, et ce que ça te libère. Gratuit, sans engagement.</p>
+      <br>
+      <div class="champ">
+        <label for="prenom">Ton prénom</label>
+        <input type="text" id="prenom" autocomplete="given-name" placeholder="Karim">
+      </div>
+      <div class="champ">
+        <label for="contact">Ton email ou ton téléphone</label>
+        <input type="text" id="contact" autocomplete="email" placeholder="karim@exemple.fr ou 06 12 34 56 78">
+      </div>
+      <div class="champ">
+        <label for="metier">Ton métier</label>
+        <input type="text" id="metier" placeholder="Plombier, kiné, garagiste...">
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" id="consent">
+        <span>J'accepte d'être recontacté à propos de ce calcul. Mes coordonnées servent uniquement à cet échange et ne sont transmises à personne d'autre sans mon accord. Je peux demander leur suppression à tout moment.</span>
+      </label>
+
+      <p class="erreur" id="erreurContact">Remplis ton prénom, ton contact et coche la case.</p>
+      <button class="cta" id="btnEnvoyer">Recevoir mon détail</button>
+    </div>
+
+    <div class="merci" id="merci">
+      <div class="carte">
+        <h2>C'est noté.</h2>
+        <p>Je te réponds dans la journée avec ton détail personnalisé.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>temps.patron</footer>
+</div>
+
+<script>
+(function(){
+  // ====== À CONFIGURER ======
+  // Colle ici l'URL de ton Google Apps Script (voir instructions).
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbyyi4quG2d7WD3_BLHe4t2w7UixfiN0u7mbS3zSlMhs95ZPkaUXEDHvV1AVX10Fo1pc/exec";
+  // ==========================
+
+  var $ = function(id){ return document.getElementById(id); };
+  var salarie = "";
+
+  // Choix salariés
+  Array.prototype.forEach.call($("salaries").querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){
+      Array.prototype.forEach.call($("salaries").querySelectorAll("button"), function(x){
+        x.setAttribute("aria-pressed","false");
+      });
+      b.setAttribute("aria-pressed","true");
+      salarie = b.getAttribute("data-val");
+    });
+  });
+
+  function euros(n){
+    return Math.round(n).toLocaleString("fr-FR") + " €";
+  }
+
+  var calcul = null;
+
+  $("btnCalculer").addEventListener("click", function(){
+    var tarif = parseFloat($("tarif").value);
+    var heures = parseFloat($("heures").value);
+
+    if(!(tarif > 0) || !(heures > 0)){
+      $("erreurCalcul").classList.add("visible");
+      return;
+    }
+    $("erreurCalcul").classList.remove("visible");
+
+    var mois = tarif * heures * 4.3;
+    var an = mois * 12;
+    var hAn = heures * 52;
+    var jours = hAn / 8;
+
+    calcul = { tarif: tarif, heures: heures, salaries: salarie, coutMois: Math.round(mois), coutAn: Math.round(an) };
+
+    $("montantMois").textContent = euros(mois);
+    $("montantAn").textContent = euros(an);
+    $("heuresAn").textContent = Math.round(hAn) + " h";
+    $("joursAn").textContent = Math.round(jours) + " journées de travail";
+
+    $("etapeResultat").classList.add("visible");
+    $("etapeResultat").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  $("btnEnvoyer").addEventListener("click", function(){
+    var prenom = $("prenom").value.trim();
+    var contact = $("contact").value.trim();
+    var metier = $("metier").value.trim();
+    var ok = $("consent").checked;
+
+    if(!prenom || contact.length < 5 || !ok){
+      $("erreurContact").classList.add("visible");
+      return;
+    }
+    $("erreurContact").classList.remove("visible");
+
+    var btn = $("btnEnvoyer");
+    btn.disabled = true;
+    btn.textContent = "Envoi...";
+
+    var data = {
+      date: new Date().toISOString(),
+      prenom: prenom,
+      contact: contact,
+      metier: metier,
+      tarifHoraire: calcul ? calcul.tarif : "",
+      heuresSemaine: calcul ? calcul.heures : "",
+      salaries: calcul ? calcul.salaries : "",
+      coutMois: calcul ? calcul.coutMois : "",
+      coutAn: calcul ? calcul.coutAn : ""
+    };
+
+    function fini(){
+      $("carteContact").style.display = "none";
+      $("merci").classList.add("visible");
+      $("merci").scrollIntoView({ behavior:"smooth", block:"center" });
+    }
+
+    if(!ENDPOINT){
+      console.log("Lead (endpoint non configuré) :", data);
+      fini();
+      return;
+    }
+
+    fetch(ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(data)
+    }).then(fini).catch(function(){
+      // On remercie quand même : le lead ne doit pas se perdre côté expérience.
+      console.log("Erreur d'envoi, lead :", data);
+      fini();
+    });
+  });
+})();
+</script>
+</body>
+</html>
