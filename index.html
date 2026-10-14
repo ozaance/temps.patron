@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Combien te coûte ta paperasse ?</title>
-<meta name="description" content="Calcule en 30 secondes ce que l'administratif te coûte chaque mois en heures non facturées.">
-<meta property="og:title" content="Combien te coûte ta paperasse ?">
-<meta property="og:description" content="Calcule en 30 secondes ce que l'administratif te coûte chaque mois.">
+<title>Combien vous coûte votre paperasse ?</title>
+<meta name="description" content="Calculez en 30 secondes ce que l'administratif vous coûte chaque mois en heures non facturées.">
+<meta property="og:title" content="Combien vous coûte votre paperasse ?">
+<meta property="og:description" content="Calculez en 30 secondes ce que l'administratif vous coûte chaque mois.">
 <meta property="og:type" content="website">
 <style>
   :root{
@@ -135,15 +135,15 @@
 
   <header>
     <div class="marque"><b>temps</b><span class="pt">.</span><b>patron</b></div>
-    <h1>Combien te coûte vraiment ta paperasse&nbsp;?</h1>
-    <p class="chapo">Chaque heure passée sur l'administratif est une heure que tu ne factures pas. Fais le calcul en 30 secondes.</p>
+    <h1>Combien vous coûte vraiment votre paperasse&nbsp;?</h1>
+    <p class="chapo">Chaque heure passée sur l'administratif est une heure que vous ne facturez pas. Faites le calcul en 30 secondes.</p>
   </header>
 
   <!-- Étape 1 : calcul -->
   <section class="carte" id="etapeCalcul">
     <div class="champ">
-      <label for="tarif">Tu factures combien de l'heure&nbsp;?</label>
-      <span class="aide">Ton tarif chantier, séance ou consultation.</span>
+      <label for="tarif">Vous facturez combien de l'heure&nbsp;?</label>
+      <span class="aide">Votre tarif chantier, séance ou consultation.</span>
       <div class="saisie">
         <input type="number" id="tarif" inputmode="decimal" min="1" step="1" placeholder="45">
         <span class="unite">€ / h</span>
@@ -160,7 +160,7 @@
     </div>
 
     <div class="champ">
-      <label>Tu as combien de salariés&nbsp;?</label>
+      <label>Vous avez combien de salariés&nbsp;?</label>
       <span class="aide">Ça change ce qu'il est possible de déléguer.</span>
       <div class="choix" id="salaries">
         <button type="button" data-val="0" aria-pressed="false">Aucun</button>
@@ -170,14 +170,14 @@
       </div>
     </div>
 
-    <p class="erreur" id="erreurCalcul">Renseigne ton tarif horaire et tes heures pour voir le résultat.</p>
+    <p class="erreur" id="erreurCalcul">Renseignez votre tarif horaire et vos heures pour voir le résultat.</p>
     <button class="cta" id="btnCalculer">Voir ce que ça me coûte</button>
   </section>
 
   <!-- Étape 2 : résultat + capture -->
   <section class="resultat" id="etapeResultat">
     <div class="carte">
-      <div class="periode">Ta paperasse te coûte environ</div>
+      <div class="periode">Votre paperasse vous coûte environ</div>
       <div class="montant" id="montantMois">—</div>
       <div class="periode">par mois en heures non facturées</div>
 
@@ -186,22 +186,22 @@
         <div class="ligne"><span>Heures perdues par an</span><span id="heuresAn">—</span></div>
         <div class="ligne"><span>Soit l'équivalent de</span><span id="joursAn">—</span></div>
       </div>
-      <p class="note">Estimation basée sur tes chiffres : tarif horaire × heures par semaine × 4,3 semaines.</p>
+      <p class="note">Estimation basée sur vos chiffres : tarif horaire × heures par semaine × 4,3 semaines.</p>
     </div>
 
     <div class="carte" id="carteContact">
-      <p class="relance"><strong>Ce chiffre te parle&nbsp;?</strong> Je te prépare le détail et je te montre ce que tu peux déléguer, combien ça coûte, et ce que ça te libère. Gratuit, sans engagement.</p>
+      <p class="relance"><strong>Ce chiffre vous parle&nbsp;?</strong> Je vous prépare le détail et je vous montre ce que vous pouvez déléguer, combien ça coûte, et ce que ça vous libère. Gratuit, sans engagement.</p>
       <br>
       <div class="champ">
-        <label for="prenom">Ton prénom</label>
+        <label for="prenom">Votre prénom</label>
         <input type="text" id="prenom" autocomplete="given-name" placeholder="Karim">
       </div>
       <div class="champ">
-        <label for="contact">Ton email ou ton téléphone</label>
+        <label for="contact">Votre email ou votre téléphone</label>
         <input type="text" id="contact" autocomplete="email" placeholder="karim@exemple.fr ou 06 12 34 56 78">
       </div>
       <div class="champ">
-        <label for="metier">Ton métier</label>
+        <label for="metier">Votre métier</label>
         <input type="text" id="metier" placeholder="Plombier, kiné, garagiste...">
       </div>
 
@@ -210,14 +210,14 @@
         <span>J'accepte d'être recontacté à propos de ce calcul. Mes coordonnées servent uniquement à cet échange et ne sont transmises à personne d'autre sans mon accord. Je peux demander leur suppression à tout moment.</span>
       </label>
 
-      <p class="erreur" id="erreurContact">Remplis ton prénom, ton contact et coche la case.</p>
+      <p class="erreur" id="erreurContact">Remplissez votre prénom, votre contact et cochez la case.</p>
       <button class="cta" id="btnEnvoyer">Recevoir mon détail</button>
     </div>
 
     <div class="merci" id="merci">
       <div class="carte">
         <h2>C'est noté.</h2>
-        <p>Je te réponds dans la journée avec ton détail personnalisé.</p>
+        <p>Je vous réponds dans la journée avec votre détail personnalisé.</p>
       </div>
     </div>
   </section>
@@ -228,7 +228,7 @@
 <script>
 (function(){
   // ====== À CONFIGURER ======
-  // Colle ici l'URL de ton Google Apps Script (voir instructions).
+  // Colle ici l'URL de votre Google Apps Script (voir instructions).
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbyyi4quG2d7WD3_BLHe4t2w7UixfiN0u7mbS3zSlMhs95ZPkaUXEDHvV1AVX10Fo1pc/exec";
   // ==========================
 
