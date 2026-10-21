@@ -1,0 +1,16 @@
+{
+  "_description": "État des commentaires Instagram déjà vus par la tâche programmée 'Surveillance commentaires — temps.patron' (trig_01QqF8b5uWJmuqs4sBNMaGho). Ne pas éditer à la main.",
+  "last_checked_at": "2026-10-21T18:57:00Z",
+  "posts": {
+    "2026-10-17_URSSAF": {
+      "url": "https://www.instagram.com/p/DemXqOtiGcO/",
+      "caption_snippet": "Depuis le 1er juin, l'URSSAF a augmenté ses tarifs",
+      "seen_comments": []
+    },
+    "2026-10-18_comptable_RH": {
+      "url": "https://www.instagram.com/p/Deow470CH4B/",
+      "caption_snippet": "Ton comptable ne fait pas ta RH",
+      "seen_comments": []
+    }
+  }
+}
